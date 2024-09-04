@@ -2,58 +2,27 @@
 
 import Image from 'next/image';
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
+  RadialBarChart,
+  RadialBar,
   Legend,
   ResponsiveContainer,
 } from 'recharts';
 
 const data = [
   {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
+    name: 'Total',
+    count: 106,
+    fill: 'white',
   },
   {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
+    name: 'Girls',
+    count: 53,
+    fill: '#fae27c',
   },
   {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
+    name: 'Boys',
+    count: 53,
+    fill: '#c3ebfa',
   },
 ];
 
@@ -61,38 +30,42 @@ const CountChart = () => {
   return (
     <div className='bg-white rounded-xl w-full h-full p-4'>
       <div className='flex justify-between items-center'>
-        <h1>Students</h1>
+        <h1 className='text-lg font-semibold'>Students</h1>
         <Image src='/moreDark.png' alt='icon pic' width={20} height={20} />
       </div>
-      <div>
-        {/* <ResponsiveContainer width='100%' height='100%'>
-          <LineChart
-            width={500}
-            height={300}
+      <div className='relative w-full h-[75%]'>
+        <ResponsiveContainer>
+          <RadialBarChart
+            cx='50%'
+            cy='50%'
+            innerRadius='40%'
+            outerRadius='100%'
+            barSize={32}
             data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
           >
-            <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey='name' />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line
-              type='monotone'
-              dataKey='pv'
-              stroke='#8884d8'
-              activeDot={{ r: 8 }}
-            />
-            <Line type='monotone' dataKey='uv' stroke='#82ca9d' />
-          </LineChart>
-        </ResponsiveContainer> */}
+            <RadialBar background dataKey='count' />
+          </RadialBarChart>
+        </ResponsiveContainer>
+        <Image
+          src='/maleFemale.png'
+          alt='icon pic'
+          width={50}
+          height={50}
+          className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+        />
       </div>
-      <div></div>
+      <div className='flex justify-center gap-16'>
+        <div className='flex flex-col gap-1'>
+          <div className='w-5 h-5 bg-lamaSky rounded-full' />
+          <h1 className='font-bold'>1,234</h1>
+          <h2 className='text-xs text-gray-300'>Boys (55%)</h2>
+        </div>
+        <div className='flex flex-col gap-1'>
+          <div className='w-5 h-5 bg-lamaYellow rounded-full' />
+          <h1 className='font-bold'>1,234</h1>
+          <h2 className='text-xs text-gray-300'>Girls (55%)</h2>
+        </div>
+      </div>
     </div>
   );
 };
